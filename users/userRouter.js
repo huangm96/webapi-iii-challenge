@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
       })
       .catch(error => {
         res.status(500).json({
-          error: "The user information could not be retrieved."
+          error: "There was an error while saving the user to the database"
         });
       });
     }
@@ -25,8 +25,8 @@ router.post('/', (req, res) => {
 });
 
 router.post('/:id/posts', (req, res) => {
-if (!req.body.text) {
-  res.status(400).json({ errorMessage: "Please provide text for the post." });
+if (!req.body.text || !req.body.user_id) {
+  res.status(400).json({ errorMessage: "Please provide text and user_id for the post." });
 } else {
   postModel
     .insert(req.body)
@@ -41,7 +41,7 @@ if (!req.body.text) {
     })
     .catch(error => {
       res.status(500).json({
-        error: "The user information could not be retrieved."
+        error: "There was an error while saving the post to the database"
       });
     });
 }
@@ -112,7 +112,7 @@ router.delete('/:id', (req, res) => {
       })
       .catch(error => {
         res.status(500).json({
-          error: "The user information could not be retrieved."
+          error: "The user could not be removed"
         });
       });
 });
