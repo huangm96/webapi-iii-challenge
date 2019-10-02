@@ -6,7 +6,17 @@ const server = express();
 const userRouter = require('./users/userRouter.js');
 const postRouter = require('./posts/postRouter.js');
 
+function logger(req, res, next) {
+     req.requestTime = new Date().toString();
+    console.log(
+      `\nrequest method: ${req.method} \nrequest url: ${req.path} \ntimestamp: ${req.requestTime}`
+    );
+
+    next();
+}
+
 server.use(express.json());
+server.use(logger);
 
 server.get("/", (req, res) => {
   res.send(`server is working`);
