@@ -1,4 +1,6 @@
-const express = 'express';
+const express = require('express');
+
+const postModel = require('./postDb.js');
 
 const router = express.Router();
 
